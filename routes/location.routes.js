@@ -30,14 +30,14 @@ const upload = require("../middlewares/upload.middleware");
 router.post(
 	"/create",
 	authorization,
-	upload.array("images", 20),
+	upload.array("images", 5),
 	validateRequest(createLocationSchema),
 	asyncHandler(createLocation)
 );
 router.put(
 	"/location/:id",
 	authorization,
-	upload.array("images", 20),
+	upload.array("images", 5),
 	validateRequest(updateLocationSchema),
 	asyncHandler(updateLocation)
 );

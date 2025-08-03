@@ -35,8 +35,8 @@ const getCommentsByLocation = async (req, res) => {
 
 	if (!comments || comments.length === 0) {
 		return res
-			.status(404)
-			.json({ error: "No comments found for this location" });
+			.status(200)
+			.json({ message: "This location doesn't have any comments yet" });
 	}
 
 	const commentsWithUser = await Promise.all(

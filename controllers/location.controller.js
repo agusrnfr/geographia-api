@@ -99,7 +99,9 @@ const deleteOldImages = async (imagesUrls, imagesPublicIds) => {
 		if (imagesPublicIds && imagesPublicIds.length > 0) {
 			for (const publicId of imagesPublicIds) {
 				try {
-					await cloudinary.uploader.destroy(publicId, { invalidate: true });
+					await cloudinary.uploader.destroy(publicId, {
+						invalidate: true,
+					});
 					console.log(`Deleted Cloudinary image: ${publicId}`);
 				} catch (error) {
 					console.error("Error deleting Cloudinary image:", error);
@@ -279,7 +281,9 @@ const updateLocation = async (req, res) => {
 
 	if (req.body.latitude || req.body.longitude) {
 		if (!isPointInArgentina(latitude, longitude)) {
-			return res.status(400).json({ error: "Location is outside Argentina" });
+			return res
+				.status(400)
+				.json({ error: "Location is outside Argentina" });
 		}
 
 		const exists = await isLocationNearby(
@@ -778,7 +782,9 @@ const getMyRating = async (req, res) => {
 	});
 
 	if (!rating) {
-		return res.status(404).json({ error: "Rating not found" });
+		return res
+			.status(200)
+			.json({ message: "You didn't rate this location yet" });
 	}
 
 	res.status(200).json(rating);
